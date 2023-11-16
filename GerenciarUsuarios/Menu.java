@@ -40,5 +40,37 @@ public class Menu {
         JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
     }
 
+    public static void listarUsuarios() {
+        if (usuarios.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Não há usuários cadastrados.");
+        } else {
+            StringBuilder lista = new StringBuilder("Lista de Usuários:\n");
+            for (Usuario usuario : usuarios) {
+                lista.append("Nome: ").append(usuario.getNome()).append(", Email: ").append(usuario.getEmail())
+                        .append("\n");
+            }
+            JOptionPane.showMessageDialog(null, lista.toString());
+        }
+    }
+
+    public static void buscarPorEmail() {
+        String emailBusca = JOptionPane.showInputDialog("Digite o e-mail a ser buscado:");
+        boolean encontrado = false;
+        StringBuilder resultado = new StringBuilder("Usuário(s) com o e-mail '" + emailBusca + "':\n");
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().equalsIgnoreCase(emailBusca)) {
+                resultado.append("Nome: ").append(usuario.getNome()).append(", Email: ").append(usuario.getEmail())
+                        .append("\n");
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado com o e-mail informado.");
+        } else {
+            JOptionPane.showMessageDialog(null, resultado.toString());
+        }
+    }
     
 }
